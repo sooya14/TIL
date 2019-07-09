@@ -85,32 +85,7 @@ git push github master
 
 
 
-```python
-import webbrowser
 
-urls = [
-    'www.github.com',
-    'www.google.com',
-    'www.edu.ssafy.com',
-    'www.naver.com',
-    'www.youtube.com'
-    ]
-
-for url in urls:
-    webbrowser.open(url)
-```
-
-
-
-### 웹은 요청과 응답이다.
-
-요청: 브라우저는 요청을 보내주는 프로그램이다. 주소(url)로 보내는 것이다. 
-
-응답: 문서로 온다. 
-
-요청(주소) >> 응답(문서)
-
-클릭의 모든 핵심은 주소창을 바꾸는 것이다. 주소가 바뀌는 것이 핵심이다! 
 
 
 
