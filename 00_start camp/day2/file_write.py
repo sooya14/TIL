@@ -6,7 +6,7 @@ lunches = {
 
 #파일을 열기위한 문법
 with open('lunch.csv', 'w', encoding='utf-8') as f:
-    f.write('식당이름','전화번호\n')
+    f.write('식당이름', '전화번호\n')
     for name, phone in lunches.items():
         f.write(f'{name}, {phone}\n')
 
