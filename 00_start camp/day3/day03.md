@@ -141,7 +141,7 @@ for i in range(1, number + 1):
 
 
 
-### check_lotto 
+### check_lotto (추후에 진행)
 
 ```python
 my = [1, 2, 3, 4, 5, 6]
@@ -169,13 +169,11 @@ numbers = range(1,46)
 lucky_numbers = random.sample(numbers, 6)
 ```
 
-
-
 * 현실데이터는 대부분 kye 와 value 로 표현된다. 
 
 
 
-#### 데이터를 가져오는 방법
+### 데이터를 가져오는 방법
 
 1. 스크래핑 : 눈으로 보기는 쉬우나 많은 작업을 해야한다. 
 
@@ -185,7 +183,7 @@ lucky_numbers = random.sample(numbers, 6)
 
 3. 패키지, 모듈 : inexfinace 
 
-   ​						가져다 써 주세요. 그러나 대부분 제공하지 않는다. 있으면 
+   ​						가져다 써 주세요. 그러나 대부분 제공하지 않는다. 
 
 
 
@@ -280,7 +278,7 @@ def pick_lunch(count):
 
 
 
-세제곱수 구하기
+#### 세제곱수 구하기
 
 ```python
 @app.route('/cube/<int:count>')
@@ -297,7 +295,7 @@ def cube(count):
 ```html
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>					
         <meta charset="utf-8">
     </head>
     <body>
@@ -319,31 +317,11 @@ def cube(count):
 </html>
 ```
 
-
-
-<head>: 뇌, 정보
-
-<body>: 문신
-
-Hyper
-
-Text
-
-Markup
-
-L
-
 * HTML 은 무조건 ""을 사용할 것이다. (python은 '')
 
 
 
- 도메인 접속 > 템플릿(문서)를 내보낸다. > 그 문서 이름은 index.html이다. > 
 
 
 
-### stock
-
-```python
-from inexfinace.stock import
-```
 
