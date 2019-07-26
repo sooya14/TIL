@@ -48,7 +48,6 @@ def receive():
     )      
 
 
-
 @app.route('/dday')
 def dday():
     today = datetime.datetime.now()
