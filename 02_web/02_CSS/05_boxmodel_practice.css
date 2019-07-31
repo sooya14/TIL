@@ -1,0 +1,16 @@
+div.rounded {
+    border-radius: 10px;  /*모서리 깍임*/
+    border: 1px solid blue;
+    width: 200px;
+    height: 300px;
+}
+
+div.a {
+    background-color: lightgrey;
+    width: 300px;  /*컨텐츠 영역을 지정*/
+    height: 200px;  /*컨텐츠 영역을 지정*/
+    padding: 25px;
+    border: 10px solid navy;
+    margin: 15px;
+    overflow: hidden;
+}

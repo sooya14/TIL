@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>selector 1</title>
+    <style>
+        h1, p, a {
+            color: red;
+        }
+
+        .pp{
+            color: orange;
+        }
+
+        a[href] {
+            color: green;
+        }
+
+        /* 정확도가 더 높기 때문에 black 으로 설정된다. */
+        a[target="_blank"] {
+            color: black;
+        }
+
+        h2[title~="greeting"]{
+            color: blueviolet;
+        }
+
+        div p {  /* 모든 div 안의 p 후손 요소 => 어딘가 밑에 있는 후손 */
+            color: chocolate;
+        }
+
+        div > p {  /* 정확히 div 의 p 중 자식 요소 */
+            color: cyan;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p>나는 div 자식</p>
+        <section>
+            <p>
+                나는 div 후손
+            </p>
+        </section>
+    </div>
+
+    <p>not me</p>
+
+    <h1>Hello</h1>
+    <p>Happy Hacking</p>
+    <p class="pp">SSAFY 2nd</p>
+
+    <a href="#">a</a>
+    <a href="#" target="_top">b</a>
+    <a href="#" target="_blank">c</a>
+    <a>d</a>
+
+    <h2 title="p greeting">hi</p>
+    <h2 title="p-goodbye">bye</p>
+    <h2 title="hello greeting">wow</p>
+</body>
+</html>

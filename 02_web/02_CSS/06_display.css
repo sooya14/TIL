@@ -1,0 +1,29 @@
+.aa{
+    background-color: coral;
+    padding: 20px;
+
+}
+.bb{
+    background-color: aqua;
+    width: 300px;
+    padding: 20px;
+
+
+}
+
+.xx {
+    width: 200px;
+    
+}
+.big-lh {
+    line-height: 3em;  /* 글과 글사이의 간격 */
+}
+
+/* inline-block 속성 */
+/* 
+
+*/
+
+.ib {
+    display: inline-block;
+}
