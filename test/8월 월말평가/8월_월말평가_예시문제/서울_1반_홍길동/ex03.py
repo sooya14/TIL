@@ -27,7 +27,7 @@ class Circle():
         return self.center 
 
     def __str__(self):
-        return f'Circle: ({self.center}), r: {self.r})'
+        return f'Circle: {self.center}, r: {self.r})'
 
 
 # 실행 결과를 확인하기 위한 코드입니다. 수정하지 마시오.
