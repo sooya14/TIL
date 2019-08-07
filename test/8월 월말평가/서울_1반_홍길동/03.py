@@ -7,16 +7,20 @@ def summary(word):
     """
 
     # 방법 1 
-    result = []
-    tmp = []  # 임시적으로 거쳐갈 리스트 
-
-    for char in word:
-        # tmp 가 비어있지 않고, 
-        # tmp 의 마지막 글자가 지금 char 와 같지 않다면
-        if tmp and tmp[-1] != char:
-            result.append(tmp[-1]) 
-
-        tmp.append(char)
+    count = 1
+    seq = 1
+    result = [word[0]]
+    for seq in range(1, len(word)):
+        if word[seq] == word[seq-1]:
+            count += 1
+                
+        else:
+            result.append(str(count))
+            result.append(word[seq])
+            count = 1
+    else:
+        result.append(str(count))
+        return ''.join(result)
 
 
 

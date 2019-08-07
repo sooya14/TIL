@@ -1,0 +1,32 @@
+{% extends 'utils/base.html' %}
+
+{% block title%}Art{% endblock%}
+{% block body %}
+
+  <h1>Asciify</h1>
+  <p>Input some text below</p>
+
+  <!-- form 태그에는 action 이 필수이다.  -->
+  <form action="/utils/output/" method="GET">
+
+    <div> <!-- 한줄에 나온다. input 은 인라인이기 때문에 -->
+      <label for="word">text</label> <!-- 일반 사용자에게는 필요하지 않지만, 라벨을 붙여주면  -->
+      <input id="word" name="user-input" type="text"> <!-- required 추가 입력 : 무조건 입력해야한다. -->
+      
+    </div>
+
+    <div>
+      <label for="font">font</label>
+      <select name="user-font" id="font">
+        {% for font in fonts %}
+        <option value="{{ font }}">{{ font }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <input type="submit" value="Select">
+    </div>
+
+  </form>
+  {% endblock %}

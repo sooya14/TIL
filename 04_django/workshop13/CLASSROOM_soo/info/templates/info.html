@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Info</title>
+</head>
+<body>
+    <h1>우리반 정보</h1>
+    <h2>Teacher</h2>
+    <li>{{ teacher }}</li>
+    <h2>Student</h2>
+    <ul>
+    {% for student in students %}
+        <li>{{ student }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
