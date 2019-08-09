@@ -1,0 +1,47 @@
+<!DOCTYPE html>  
+<html lang="ko">  <!-- 주로 언어를 무었을 쓰는지  -->
+<head>  
+  <meta charset="UTF-8">  <!-- 메타 태그  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title> 
+  <style>
+    span {color: red},
+  </style>
+</head>
+<body>  
+  <!-- Inline -->
+  <!-- 선의 영역이기 때문에 옆에 이어진다. 세로 공간이 없다.(폰트 사이즈만큼만 먹게된다.)
+    element width == content 의 가로폭-->
+  <span attribute="attribute-value">content</span>
+  <a href="url/file_path"></a>
+  <img src="url/file_path" alt="description(설명을 적어줘야한다. 만약 뜨지 않았을 때)">
+  <input type="text">
+  <!--인라인 블록이다. -->
+  <select name="" id=""><option value=""></option></select>
+  <textarea name="" id="" cols="30" rows="10"></textarea>
+
+
+  <!-- Block -->
+  <!-- 새줄에서 시작(밑에 붙음),  m, p, b 있음
+    element width == 부모의 element 가로폭-->
+  <div>HTML4 표준까지는 오직 div</div>
+  <!-- html 에서만 의미가 있다. -->
+  <nav>s</nav>
+  <header>e</header>
+  <aside>m</aside>
+  <section>a</section>
+  <article>n</article>
+  <footer>tic</footer>
+
+
+  <ul><li></li></ul>
+  <form action="">  <!--블록이고 그 안의 속성들은 인라인이다.  -->
+    <input type="">
+    <select name="" id=""></select>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+  </form>
+  <h1><h2><h3></h3></h2></h1>
+  <p></p>
+
+</body>
+</html>
