@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="06_display.css">
+</head>
+<body>
+    <!-- block level -->
+    <div class="aa">
+        <h2>Block level</h2>
+        <p>width, height 미지정 => width: 100%; height: auto;</p>
+    </div>
+    <div class="bb">
+        <h2>Block level</h2>
+        <!--위 아래가 블록이기 때문에 위아래가 떨어져 있다.  -->
+        <a href="#">This is inline</a>  
+        <p>width 300px 지정 => width: 300px; height: auto;</p>
+    </div>
+    <hr>
+    <!-- inline level -->
+    <h1>My <span>great</span> heading</h1>
+    <span class="cc">Inline</span>  <!--위에가 길이를 많이 차지 했기 때문에 어쩔 수 없이 새로운 줄에서 시작한 것 -->
+    <span class="dd">Inline</span><span class="ee"></span>Inline<span class="cc"></span>
+ 
+    <div class="xx">
+        <span class="big-lh">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit molestias repudiandae amet natus corrupti libero exercitationem laudantium impedit iusto laborum dolorem harum itaque cum, eius animi dolor non necessitatibus!</span>
+    </div>
+    <hr>
+    <!-- inline block -->
+    <p class="ib">p는 원래 블록</p>
+    <p class="ib">하지만 짜잔!</p>
+</body>
+</html>

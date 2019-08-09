@@ -1,0 +1,46 @@
+.size-40 { font-size: 40px; }
+.size-2x { font-size: 2.0em; }  /*보통 em 단위로 움직인다.*/
+.size-150p { font-size: 150%; }
+.size-large { font-size: large; }
+
+/*폰트의 계열 */
+.selif { 
+    font-family: "Times New Roman", Times, serif
+}  /* 컴퓨터 안에 우선순위에 맞게 있다면 실행을 시켜달라고.. */
+.sans-selif { 
+    font-family: Arial, Helvetica, sans-serif
+}
+.monospace { 
+    font-family: consolas, Courier, monospace
+}  /*고정폭 글꼴 */
+
+.oblique {
+    /* normal, italic, oblicque */
+    font-style: oblique;
+}
+
+.weight {  /*bold 는 weight 에 있다는 정도만 알아두기*/
+    font-weight: bold;
+}
+
+.loose {
+    letter-spacing: 5px;  /*자간*/
+}
+
+h1 { text-align: center;}
+h2 { text-align: right;}
+p.left { text-align: justify;}
+p.right { text-align: justify;}  /*좌우 공간 맞추기?*/
+p.center {text-align: center;}  /*박스로 옮겨서 해야한다. */
+div.center-image {
+    text-align: center;
+}
+
+/* a는 인라인이니깐 자신의 공간이 딱 그만큼 있기 때문에 애초에 센터가 될 수 없다.  */
+a {
+    text-align: center;
+}
+
+
+
+
