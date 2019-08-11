@@ -1,4 +1,4 @@
-# Web 과목평가 
+# Web 과목평가 | 190812
 
 * 셀렉터
 
@@ -7,8 +7,6 @@
 * 포지션 릴레이티브스 셀렉팅 
 
   
-
-
 
 ## 00_Web
 
@@ -110,6 +108,8 @@ URL (Union Resourcr Locator) 파일식별자
 
 
 
+* W3C : 웹 표준을 정하는 곳  
+
 
 
 ## 01_HTML
@@ -121,13 +121,9 @@ URL (Union Resourcr Locator) 파일식별자
 
 ---
 
-
-
-
-
 ### 01) HTML이 무엇인가?
 
-* HTML == Hyper Text Markuo Language
+* HTML == Hyper Text Markup Language
 
 
 
@@ -157,145 +153,399 @@ html 의 요소는 `<head>` 와 `<body>` 로 구성된다.
 `<head>`
 
 * 문서 제목, 문자코드(인코딩)와 같이 해당 문서 정보를 담고 있고, 브라우저에 나타나지 않는다. 
+* 사진이라는 데이터에 대한 데이터 
 
 `<body>` 
 
+* 본문
 * 브라우저 화면에 실제의 내용에 해당 
+
+
+
+`<meta charset="UTF-8">`
+
+- 이것을 안쓰면 한글이 깨지는 경우도 있을 수가 있다. 
+- 쓰는게 무조건 옳다. 
+
+
+
+`<title>`
+
+- 문서의 제목 
+- 브라우저 탭, 북마킹 할 때 사용되는 것 
+
+
+
+태그 (Tag)
+
+* `<h1></h1>` 
+* `<img src="url"/> ` => 닫는 태그가 따로 없는 것도 있다. 
+
+속성 (Attribute)
+
+* `<a href="url"/>` 
+
+  => `href` 가 속성명 / `"url"` 가 속성값
 
 
 
 ### 03) 시맨틱 태그
 
+=> 의미를 가지는 태그들
 
-
-* header, nav, aside, section, article, footer => div, span 등 은 시맨틱태그가 아니다. 
-* 
-
-
-
-
-
-
-
-
-
-
-
-**웹 표준** 
-
-W3C : 웹 표준을 정하는 곳  
+* header,
+* nav
+* aside : 메인 콘텐츠와 관련성이 적은 콘텐츠에 사용
+* section 
+  * 문서의 일반적인 구분
+  * h1~h6
+*  article
+* footer 
+* div, span 등 은 시맨틱태그가 아니다. 
 
 
 
-`head` => 뇌 : 정보가 담겨있고 밖에 보이지 않는다. 
+### Tag_index.html 
 
-`body` 
+* `<strong></strong>` : 글씨 굵게 (과거: `<b></b>`)
+* `<em></em>` : 글씨 기울어지게 (`<i></i>`)
+* `<mark></mark>` : 형광펜
+* `<del></del>` : 글씨 가운데에 밑줄
+* `<ins></ins>` : 밑줄
+* `<p></p>` 
+* `<br>` : 다음 줄로 넘어가기 (엔터같은 )
+* `<hr>` : 크게 가로줄 
+* `<blockquote></blockquote>` : 인용문구
+* `<li></li>` :  ●
 
-
-
-"" 을 전부 사용한다. 
-
-
-
-☆ 가장 중요한 제목은 h1 은 하나여야한다. html 을 작성할 때 역할을 생각해야한다. 
-
-
-
-
-
-## 코드카데미 
-
-https://www.codecademy.com/
-
-=> 'Introduction to HTML'  pro 빼고 5개 해오기 / (예습 : css)
+* `<ol><li></li><ol>` : 넘버링 된다. 
 
 
 
-### 1. Learn HTML: Elements and Structure
+//
+
+`<div>` 
+
+* 의미 없이 영역을 구분짓는 용도 => 레이아웃을 잡는 용도로 많이 사용하기 때문에 중첩이 특히 많다. 
+* 블록속성
+
+`<span>` 
+
+* div 와 마찬가지 
+* 인라인 속성
+
+//
 
 
 
-```html
-<h1>큰 제목</h1>
+### 04) 자주 사용하는 태그들 (a, img, form 등)
 
-<body>
-    <div>
-        <p>본문 내용</p>
-        </div> 
-</body>
-```
+* ` <a href="#" target="_blank">이곳</a>`
+  
+* href 에 URL 입력 / 없으면 #
+  
+* 이미지 삽입
+
+  `<img width="500" alt="cat" src="./images/cat.jpeg">`
+
+  * alt : 그림에 대한 설명 
+  * src : url 또는 파일 위치 
+
+* 동영상 삽입 
+
+`<iframe width="560" height="315" src="URL"></iframe>`
+
+* Table
+  * th : table head => 표의 제목
+  * tr : table row => 가로줄을 만드는 역할 
+  * td : table data => 셀을 만드는 역할 
+  * `rowspan="2"` : 위아래를 합친다. => 행 두개를 합친다. 
+  * `colspan="2"` : 양옆을 합니다 => 열 두개를 합친다. 
 
 
 
-- `<div id=""> </div>`
-  - text 나 다른 HTML 을 포함할 수 있다. (링크, 이미지, 비디오와 같은)
-  - `id=""` : 구체적으로 속성을 부여 
+% 04, 05, 05_subway %
 
 
 
-- `<em> </em>` : 삐뚤게 써지기 
+## 02_CSS
 
-- `<strong> </strong>` : 글씨체 굵게 
+https://poiemaweb.com/
+
+* CSS는 무엇인가?
+
+- 선택자 (Selector)
+- 프로퍼티 값의 단위 (키워드, 크기 단위, 색깔 등)
+- Box Model의 이해 (box-sizing, margin, border, padding 등)
+- display 속성 (block, inline, inline-block, none)
+- font 속성 (font-size, font-family 등)
+- position (relative, absolute 등)
+
+---
+
+% css 는 모든 파일 복습 %
+
+### 01) CSS는 무엇인가?
+
+* CSS == Cascading Style Sheets
+
+* html 의 각 요소의 style 을 정의하여 화면 등에 어떻게 렌더징 하면 되는지 브라우저에게 설명하기 위한 언어 => styling  (html: 정보의 구조화)
+* html 없이 단독으로 존재하는 css 는 없다. (html은 css 를 포함할 수 있다. )
+
+
+
+` <link rel="stylesheet" href="css/style.css">`
+
+=> html 이랑 css 연결하는 방법 
+
+
+
+### 02) 선택자 (Selector) ☆
+
+![](C:\Users\user\AppData\Roaming\Typora\typora-user-images\1565412936034.png)
+
+전체 `*` 
+
+태그 셀렉터 : 그냥 태그 기입 
+
+id 셀렉터 : `#` 
+
+클래스 셀렉터 : `.`  (class  이름을 지을 때 띄어쓰기 기준은 _  이 아니라 - 로 짓는다. )
+
+
+
+`div p` 
+
+* div 안에 있는 모든 p 에게 적용 
+* 어딘가에 또 들어있더라도 적용 ㅇㅇ
+
+`div > p` 
+
+* div 안에 있는 p 에게만 적용
+
+   만약 div 안에 span 안에 p 가 있다면 적용 ㄴㄴ 
+
+
+
+`p:first-child` / `p:last-child`
+
+* 첫번째의 태그와 마지막 태그가 p 태그이면 적용된다. 
+* 그리고 만약 그 안에 div 가 있으면 div 안에 p 가 있으면 이것도 적용된다. 
+
+`p:fritst-child` / `p:last-of-tyrpe`
+
+* p 태그 들 중에서 처음과 마지막 
+* 만약 body 안에 따로 div 가 있으면 빼고 따로 각자 적용한다. 
+
+
+
+후손요소 (하위요소) 에 프로퍼티 값이 지정 되면 부모셀렉터가 아닌 자신에게 부여된 값을 따른다. 
+
+
+
+### 03) 프로퍼티 값의 단위 (키워드, 크기 단위, 색깔 등)
+
+* 크기 단위
+
+  * 절대값
+
+    * px
+    * rem :  html 의 기본 폰트 값 == 1rem
+
+  * 상대값
+
+    * em : 상속받은 폰트 값을 물려받아서 적용을 하는 것이고 
+
+      ex) 2em => 부모의 폰트값 px * 2
+
+    * % : 부모의 폰트 값에 적용 
+
+      ​	ex) 120% => 부모의 폰트값 px * 1.2
+
+      
+
+* Viewport 
+
+  *  디스플레이가 비율이 변화함에 따라서 달라진다. 
+
+  * `vw` , `vh`  => 퍼센트 느낌 / 화면 전체가 100 이다. 
+
+    ex) 100vh => 화면 높이 전체 
+
+
+
+### 04) Box Model의 이해 (box-sizing, margin, border, padding 등) ☆
+
+content : 컴퓨터 => 내용 
+
+padding : 컴퓨터 밖의 책상 부분 => 컨텐트 밖 부분
+
+border : 책상 모서리 
+
+* border-radius : 모서리 둥글게 => px 로 조정
+
+margin : 옆 책상과의 간격 
+
+
+
+* content 가 반드시 있어야 한다. 그렇지 않으면 잡히지 않는다. 
+* 가로에 아무것도 없지만 끝까지 선점하려고 한다. 
+
+
+
+### 05) display 속성 (block, inline, inline-block, none) ☆
+
+#### Block 
+
+* 나란히 안되고 아래에  쓰여진다. 아무얘기 안했는데 엔터를 한 느낌 
+* `div / h1 ~ h6, p, ol, ul, li, hr, table, form`
+
+* ★특징
+
+  1. 항상 새로운 line 에서 시작 
+  2. 기본으로 width 100% (욕심쟁이~)
+  3. width height margin padding 속성 지정 가능.
+  4. block 요소 안에 inline 요소를 포함 가능 
 
   
 
-- `<br><br>` : 엔터 같은거?
+#### Inline 
+
+* 나란히 쓰여진다. 
+* 폭개념이 없다. => margin, padding 이 없다. 
+* `span, a, stong, em, del, img, br, input, select, textarea, button`
+* ★특징
+  1. 새로운 라인에서 시작하지 않으며, 문장 중간에서 쓸 수 있다. => 선의 영역이기 때문에 옆에 이어진다. 
+  
+  2. content 너비만큼 가로 폭을 차지한다. 
+  
+  3. width height margin padding 속성을 지정할 수 없다. 
+     
+     세로공간이 없다. 
+     
+     - 줄과 줄 사이의 너비 == 행간이 존재한다. => 행간으로 상하 여백을 지정한다. `line-height`
+     
+  4. inline 요소 뒤에 공백(\n , space)이 있으면, 자동으로 space (4px)가 들어간다. 
+  
+  5. liline 요소안에 block 요소 포함이 불가능한다. (망한다)
 
 
 
-- list 항목  (● 형태)
+#### Inline-block
 
-```html
-<ul>
-  <li>Arctos</li>
-  <li>Collarus</li>
-</ul>
-```
-
-- list 항목 (넘버링)
-
-```html
-<ol>
-	<li>Russia </li>
-	<li>United States </li>
-    <li>Canada</li>
-</ol>
-```
-
-​	
-
-- 삽입
-
-  - 이미지 삽입 : `<img src="이미지url" />`
-  - 동영상 삽입 
-
-  ```html
-  <video src="myVideo.mp4" width="320" height="240" controls>
-    Video not supported
-  </video>
-  ```
-
-  `src` : 
+* `display: inline-block;`  => 블록을 인라인으로 만들어 준다. 
+* 박스인데 욕심없는 박스이다. 
+* 특징
+  1. inline  의 한줄표시 + block 의 margin, padding, width, height 
+  2. content 너비 만큼 가로폭
+  3. display: inline-block 인 요소들 뒤에 공백은 space(4px)
+  4. 상하 여백: margin 과 line height 로 가능
 
 
 
-### 2. Learn HTML: Tables
+### 06) position (relative, absolute 등) ☆
+
+https://poiemaweb.com/css3-position
+
+absolute 
+
+relative
 
 
 
-```html
-<table>
-    <tr>
-        <th>Company Name</th>
-        <th>Number of Items to Ship</th>
-        <th>Next Action</th>
-    </tr>
-</table>
-```
+### 07) font 속성 (font-size, font-family 등)
 
 
 
+## 03_Bootstrap
+
+- Bootstrap은 무엇인가?
+- Spacing (m-\*, p-\*, mx-\*, my-\* 등)
+- Colors (primary, secondary 등)
+- 그리드 시스템 (Grid System)
+- 사용 가능한 클래스
+- 사용 가능한 컴포넌트 (Components) 
+
+---
+
+### 01) Bootstrap은 무엇인가?
+
+* 반응형 웹 디자인을 위한 오픈 소스 프레임 워크 
+* 디바이스에 따라 가로폭이나 배치를 변경하여 가독성을 높이도록
+* `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
 
 
+
+### 02) Spacing (m-\*, p-\*, mx-\*, my-\* 등)
+
+* m : 마진
+* p : 패딩
+* t, r, b, l
+* x : 좌우 / y : 상하
+
+
+
+### 03) Colors (primary, secondary 등)
+
+* primary : 파랑
+* secondary : 짙은 회색
+* success : 초록색
+* danger : 빨강
+* warning : 노랑
+* info : 청록색 (하늘색)
+* light : 흰색같은데...
+* dark : 검정
+* white : 흰색 
+
+
+
+### 04) 그리드 시스템 (Grid System)
+
+* `col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2`
+
+* `<div class="row">` 안에 또 넣으면 그 안에서 12를 기준으로 나누어서 할 수 있다. 
+
+* `offset-5` : 내 앞에 5자리 비워놔 
+
+* extra small : <576px (.col-)
+
+
+  small : ≥576px  (.col-sm-)
+
+
+  medium : ≥768px (.col-md-)
+
+
+  large : ≥992px (.col-lg-)
+
+
+  extra large : ≥1200px (.col-xl-)
+
+
+
+### 05) 사용 가능한 클래스
+
+display
+
+* `d-inline` : block 을 inline 처럼 display 된다. 
+* `d-block` : inline 을 block 처럼 displaly 된다. => 다음 tag 가 옆에 오는 것이 아니라 블록처럼 아래칸에 위치한다. 
+* `d-lg-none` : 특정 크기일때 보여지는 것 => 라지의 경계선일 때 없다가 그보다 작아지면 등장한다. 
+* `d-none` : 라지일 때 등장하고 라지보다 작아지면 사라진다. 
+
+
+
+Text
+
+* `class=text-left` : text 클래스는 블록한테만 적용된다. 인라인은 안된다. 
+
+  (인라인은 텍스트의 길이에 따라 범위가 있는데 움직일 수가 없겟지)
+
+  
+
+`<div class="container"></div>` : 모바일처럼 사용을 할 수 있다. 
+
+
+
+### 06) 사용 가능한 컴포넌트 (Components) 
 
 
