@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %}  <!-- 상속 / 항상 윗줄에 위치해야한다. !-->
+
+{% block title %}
+    Guess me.
+{% endblock %}
+
+{% block body %}
+    <h1>질문지</h1>
+    <form action="{% url 'home:answer' %}" method="GET">
+        <div>
+            <label for="q1">내 생일은?</label>
+            <input id="q1" name="q1" type="text">
+            <!-- name 의 이름이 있어야 데이터를 받아올 수 있다.  -->
+        </div>
+        
+        <div>
+            <label for="q2">야구 응원팀은?</label>
+            <input id="q2" name="q2" type="text">
+        </div>
+        
+        <div>
+            <label for="q3">혈액형은?</label>
+            <input id="q3" name="q3" type="text">
+        </div>
+        
+        <input type="submit">
+    </form>
+
+{% endblock %}
+
