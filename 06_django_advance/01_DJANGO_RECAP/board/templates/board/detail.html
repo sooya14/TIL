@@ -6,4 +6,35 @@
     <p>
         {{ article.content }}
     </p>
+    <div>
+        <!--a b 순서이다 ㅎ-->
+        <a href="{% url 'board:edit' article.id %}"> 
+        <!-- 가변 처리해야하는 부분은 처리해줘야한다. -->
+        {% comment %} <a href="/board/articles/{{ article.id }}/edit"> {% endcomment %}
+            <button>Edit</button>
+        </a>
+    </div>
+    <div>
+        {% comment %} <a href="{% url 'board:delete' article.id %}">
+            <button>Delete</button>
+        </a>
+        <!--GET 요청 / a 태그는 GET 요청밖에 하지 못한다.--> 
+        데이터 베이스를 건드는 것은 POST 라고 했는데... 
+        {% endcomment %}
+        
+        <form action="{% url 'board:delete' article.id %}" method="POST">
+            {% csrf_token %}  
+            <input id="delButton" type="submit" value="삭제">
+        </form>
+    </div>
+
+    <!--자바스크립드st-->
+    <script>
+        const deleteButton = document.querySelector('#delButton');
+        function writeHi () {
+            document.write('Hi');
+            
+        }
+        delButton.addEventListener('mouseover', writeHi);
+    </script>
 {% endblock %}
