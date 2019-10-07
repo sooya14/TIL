@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Article
 
 
@@ -19,4 +19,12 @@ def detail(request, id):
         'article': article, 
     })
   
+def new(request):
+    return render(request, 'board/new.html')
 
+def create(request):
+    article = Article()
+    article.title = request.POST.get('title') # db 에 저장을 하는 과정 
+    article.content = request.POST.get('content')
+    article.save()
+    return redirect('board:detail', article.id) # redirect 절로 가~
