@@ -1,0 +1,19 @@
+App: classroom $ django-admin startapp classroom
+
+model : Student
+name: models.CharField(max_length=10)
+age : models.IntegerField()
+major: models.TextField()
+
+
+
+/classroom/students/new
+/classroom/students/create
+
+/classroom/students/
+/classroom/students/1
+
+/classroom/students/1/edit
+/classroom/students/1/update
+
+/classroom/students/1/delete

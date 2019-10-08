@@ -1,0 +1,33 @@
+{% extends 'classroom/base.html' %}
+
+{% block css %}
+<style>
+    .ui-btn {
+        margin-left: 30px;
+    }
+</style>
+{% endblock css %}
+
+{% block title %}A-3 List{% endblock title %}
+
+{% block body %}
+
+    <h1>***SSAFY A-3***</h1>
+    
+
+    <ul>
+        {% for classroom in classrooms %}
+        <li>
+            <a href="{% url 'classroom:detail' classroom.id %}">{{ classroom.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="ui-btn">
+        <a href="{% url 'classroom:new'%}">
+            <button>ADD</button>
+        </a>
+    </div>
+    
+
+{% endblock body %}
