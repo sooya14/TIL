@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_GET, require_POST
 
 from .models import Article
+from .forms import ArticleModelForm
 
 
 @require_GET
@@ -29,38 +30,71 @@ def detail(request, id):
     })
 
 
-@require_GET
+# ArticleModelForm 함수 설정했을 때
 def new(request):
-    return render(request, 'board/new.html')
+    if request.method == 'POST':
+        form = ArticleModelForm(request.POST)  # 알아서 데이터 분류 작업을 해준다. 
 
+        if form.is_valid():  # title 이 2글자 보다 길면 저장하라 
+            article = form.save()
+            return redirect(article) 
+    else:  # GET 요청일 때 
+        form = ArticleModelForm()  
 
-@require_POST
-def create(request):
-    article = Article()
-    article.title = request.POST.get('title') # db 에 저장을 하는 과정 
-    article.content = request.POST.get('content')
-    article.save()
-    return redirect('board:detail', article.id) # redirect 절로 가~
-
-
-@require_GET
-def edit(request, id):
-    article = get_object_or_404(Article, id=id)
-    # id 하나를 찾기 위한 코드
-    article = Article.objects.get(id=id)
-    return render(request, 'board/edit.html', {
-        'article': article,
+    return render(request, 'board/new.html', {
+        'form': form,
     })
 
 
-@require_POST # db 관련된 일을 할 때 POST 라고 생각해도 될듭?
-def update(request, id):
+# def new(request):
+#     if request.method == 'POST':
+#         article = Article()
+#         article.title = request.POST.get('title') 
+#         article.content = request.POST.get('content')
+#         article.save()
+#         # return redirect('board:detail', article.id)
+#         return redirect(article) # get_absolute_url 함수 사용하면 이렇게 간단하게 코드 가능
+        
+#     else:  # GET 면 저장을 한다. 
+#         return render(request, 'board/new.html')
+
+
+
+# @require_POST
+# def create(request):
+#     article = Article()
+#     article.title = request.POST.get('title') # db 에 저장을 하는 과정 
+#     article.content = request.POST.get('content')
+#     article.save()
+#     return redirect('board:detail', article.id) # redirect 절로 가~ / detail url 로 가랏
+
+
+# @require_GET
+def edit(request, id):
     article = get_object_or_404(Article, id=id)
-    article = Article.objects.get(id=id)
-    article.title = request.POST.get('title')
-    article.content = request.POST.get('content')
-    article.save()
-    return redirect('board:detail', article.id)  # 안되면 하드코딩으로 해보기 
+    if request.method == 'POST':
+        article.title = request.POST.get('title')
+        article.content = request.POST.get('content')
+        article.save()
+        # return redirect('board:detail', article.id)
+        return redirect(article)
+
+    else:
+        # id 하나를 찾기 위한 코드
+        return render(request, 'board/edit.html', {
+            'article': article,
+        })
+        
+
+
+# @require_POST # db 관련된 일을 할 때 POST 라고 생각해도 될듭?
+# def update(request, id):
+#     article = get_object_or_404(Article, id=id)
+#     article = Article.objects.get(id=id)
+#     article.title = request.POST.get('title')
+#     article.content = request.POST.get('content')
+#     article.save()
+#     return redirect('board:detail', article.id)  # 안되면 하드코딩으로 해보기 
 
 
 @require_POST  # 데코레이터(이 함수에 대한 데코레이팅이 된다.) / POST 로 요청했을 때만 작동해랏! 
