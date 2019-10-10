@@ -4,7 +4,7 @@
 {% block body %}
 <h1>This is Article list</h1>
 
-<a href="{% url 'board:new' %}">New article</a>
+<a href="{% url 'board:new_article' %}">New article</a>
 
 {% if articles %}  <!-- articles 에 아무것도 없으면 실행되지 않게 하기 위해 -->
 <ul>

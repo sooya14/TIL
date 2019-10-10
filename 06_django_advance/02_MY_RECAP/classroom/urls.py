@@ -24,7 +24,5 @@ urlpatterns = [
 
     path('student/<int:id>/update/', views.update, name='update'),
 
-    
-
 
 ]
