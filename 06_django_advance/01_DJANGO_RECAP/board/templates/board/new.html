@@ -4,12 +4,14 @@
 
 {% block body %}
 <h1>New article</h1>
-<form method="POST">
+{% include 'board/_form.html' %}
+
+{% comment %} <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}  <!--p 태그에 넣는다-->
+    {{ form.as_table }}  <!--p 태그에 넣는다-->
     <input type="submit">
 
-</form>
+</form> {% endcomment %}
 
 <!--action : 받는 사람의 주소 -->
 {% comment %} <form action="{% url 'board:create' %}" method="POST"> <!--어디로 봉투를 보내야하는지 알려주는 것-->  {% endcomment %}

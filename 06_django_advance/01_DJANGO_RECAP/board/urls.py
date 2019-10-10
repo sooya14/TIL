@@ -4,7 +4,7 @@ from . import views
 app_name = 'board'
 
 urlpatterns = [
-    path('', views.index, name='index'), # /board/ == board:index
+    # path('', views.index, name='index'), # /board/ == board:index
 
     # Read 글 목록(list) render
     path('articles/', views.list, name='list'),
