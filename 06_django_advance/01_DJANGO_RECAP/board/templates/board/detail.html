@@ -30,23 +30,9 @@
 
     <hr>
 
-    <form action="{% url 'board:new_comment' article.id %}" method="POST">
-        {% csrf_token %}
-        <input type="text" name="comment_content">
-        <input type="submit">
-    </form>
-
-    <!--comment 모두 가져오는 부분 -->
-    {% if comments %}
-        <ul>
-            {% for comment in comments %}
-                <li>{{ comment.content }}</li>
-            
-            {% endfor %}
-        </ul>
+    {% include 'board/_comment.html' %}
     
-    {% endif %}
-
+    
     <!--자바스크립드st-->
     {% comment %} <script>
         const deleteButton = document.querySelector('#delButton');

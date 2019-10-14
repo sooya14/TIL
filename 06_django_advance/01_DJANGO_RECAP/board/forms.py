@@ -1,8 +1,8 @@
 from django import forms
 from .models import Article, Comment
 
-# forms.Form => Data 입력 및 검증 
-# forms.ModelForm => Data 입력/검증 + HTML 생성 
+# forms.Form => Data 입력 및 검증 + HTML 제공 => Model 정보 모름 
+# forms.ModelForm => Data 입력/검증 + HTML 생성 => Model 정보를 알고있음 
 
 
 class ArticleModelForm(forms.ModelForm):
@@ -12,7 +12,7 @@ class ArticleModelForm(forms.ModelForm):
     title = forms.CharField(min_length=2, max_length=100)  
 
 
-    class Meta:
+    class Meta:  # 케이스를 씌우는 
         model = Article
         fields = '__all__'
 
@@ -23,5 +23,12 @@ class CommentModelForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ('content',)  # contetnt 만 검증하겠다는 의미 
+
+
+
+# 참고형
+class ArticleForm(forms.Form):
+    title = forms.CharField(min_length=2, max_length=100)
+    content = forms.CharField()  # 모든 컬럼에 대해서 다 써줘야한다. 
 

@@ -1,0 +1,24 @@
+<form action="{% url 'board:new_comment' article.id %}" method="POST">
+        {% csrf_token %}
+        {% comment %} <input type="text" name="comment"> {% endcomment %}
+        {{ comment_form.as_p }}
+        <input type="submit">
+    </form>
+
+    <!--comment 모두 가져오는 부분 -->
+    {% if comments %}  <!--만약 comments 가 있으면 for문 돌기-->
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    {{ comment.content }} 
+                    <form method="POST" action="{% url 'board:delete_comment' article.id comment.id %}">  <!--url 순서대로 id 입력하면 된다. -->
+                        {% csrf_token %}
+                        <input type="submit" value="삭제">
+                    </form>
+                    <button>수정</button>  <!--자바스크립트를 통해서 가능하다.. -->
+                </li>
+            
+            {% endfor %}
+        </ul>
+    
+    {% endif %}

@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404 
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 
-from .forms import ArticleModelForm, CommentModelForm
+from .forms import ArticleModelForm, CommentModelForm, ArticleForm
 from IPython import embed # 왜 에러가 났는지 알수 있다. 디버깅처럼 
 from .models import Article, Comment
+
+
+
 
 # CRUD
 @require_http_methods(['GET', 'POST'])  # GET, POST 만을 처리하겠다. (비공식적으로 많은 method 가 존재하기 때문에)
@@ -46,9 +49,13 @@ def article_list(request):
 def article_detail(request, article_id):
     article = get_object_or_404(Article, id=article_id)
     comments = article.comment_set.all()  # 모든 comments 를 리스트로 저장한다. # Comment.objects.filter(article_id=article.id)
+    # article views 라고 해서 comments 를 안에 설정하는 것을 어색해 하지말고,
+    comment_form = CommentModelForm()  # 화면을 그냥 볼때는 () 비워 놓고,
+
     return render(request, 'board/detail.html', {
         'article': article,
         'comments': comments,
+        'comment_form': comment_form,
     })
 
 @require_http_methods(['GET', 'POST'])
@@ -77,14 +84,65 @@ def delete_article(request, article_id):
 @require_POST
 def new_comment(request, article_id):  # /board/articles/N/comments/new
     article = get_object_or_404(Article, id=article_id)
-    comment = Comment()
-    comment.content = request.POST.get('comment_content')
-    comment.article_id = article.id
-    comment.save()
+
+    # comment = Comment()
+    # comment.content = request.POST.get('comment_content')
+    # comment.article_id = article.id  # 몇번 게시글의 댓글인지를 알기 위해서 url 에 N 이 있다. 
+    # comment.save()
+
+    form = CommentModelForm(request.POST)  # 화면을 보여주는 것이 아니라 저장을 담당하는 부분(POST) => 날라온 데이터를 받아줘야한다. 
+    # 판별하고 싶을 때는 request.POST 를 채워넣어야한다. 
+    # embed()
+    if form.is_valid():  # id 는 신경을 쓰지 않는다. 
+        # comment = Comment()
+        # comment.content = request.POST.get('content')
+        comment = form.save(commit=False)  # comment = form.save() 는 의미가 없다. comment의 detail 화면으로 갈 필요가 없기 때문에 # commit : 저장하는 척
+        # id 는 사용자가 직접 입력하지 않기 때문에 commit 사용 
+        # 저장은 중요하니까..? 제어를 뻇어 와서 검증할라고 
+        comment.article_id = article.id  # 몇번 게시글의 댓글인지를 알기 위해서 url 에 N 이 있다. 
+        comment.save()
+        
+    # 유효하지 않아도 detail 화면으로 간다. 그래서 이걸로 끝!
     return redirect(article)
 
 
+@require_POST  # 데이터를 삭제하니까 POST
+def delete_comment(request, article_id, comment_id):
+    # article = get_object_or_404(Article, id=article_id)
+    # comment = get_object_or_404(Comment, id=comment_id)
+    # if comment in article.comment_set.all():  # 게시글에 달린 댓글의 모든 것 
+    #     comment.delete()
+    # return redirect(article)
 
+    # 가성비 코드 
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.delete()  # db 에서 삭제되고, 
+    return redirect(comment.article)  # 이 함수가 끝난 후에 메모리에서 삭제된다. => 메모리삭제와 db삭제는 다르다. 
+
+    
+
+
+
+
+# # (참고사항) Create Article with Form 
+# def new_article_with_form(request):
+#     if request.method == 'POST':
+#         form = ArticleForm(request.POST)
+
+#         if form.is_valid():           
+#             article = ArticleForm()
+#             # article.title = request.POST.get('title') # 검증되지 않은 데이터 / 오염된 데이터가 들어갈 수 있기 때문에 가급적이면 사용하지 않는 것이 좋다. 
+#             article.title = form.cleaned_data.get('title') # 검증된 데이터 / 데이터가 자동으로 들어가지 않아서 직접 하나씩 꼽아줘야한다. 
+#             article.content = form.cleaned_data.get('content')
+#             article.save()
+#             return redirect(article)
+
+#     else:
+#         form = ArticleForm()
+
+#     return render(request, 'board/new.html', {
+#         'form': form,
+#     })
 
 
 
