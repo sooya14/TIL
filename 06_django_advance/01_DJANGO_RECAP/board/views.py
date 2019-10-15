@@ -108,16 +108,19 @@ def new_comment(request, article_id):  # /board/articles/N/comments/new
 
 @require_POST  # 데이터를 삭제하니까 POST
 def delete_comment(request, article_id, comment_id):
-    # article = get_object_or_404(Article, id=article_id)
-    # comment = get_object_or_404(Comment, id=comment_id)
-    # if comment in article.comment_set.all():  # 게시글에 달린 댓글의 모든 것 
-    #     comment.delete()
-    # return redirect(article)
+    # 시간이 좀 걸리는 코드 
+    article = get_object_or_404(Article, id=article_id)
+    # SELECT * FROM articles WHERE id=article_id
+    comment = get_object_or_404(Comment, id=comment_id)
+    # SELECT * FROM comments WHERE id=comment_id
+    if comment in article.comment_set.all():  # 게시글에 달린 댓글의 모든 것 
+        comment.delete()
+    return redirect(article)
 
     # 가성비 코드 
-    comment = get_object_or_404(Comment, id=comment_id)
-    comment.delete()  # db 에서 삭제되고, 
-    return redirect(comment.article)  # 이 함수가 끝난 후에 메모리에서 삭제된다. => 메모리삭제와 db삭제는 다르다. 
+    # comment = get_object_or_404(Comment, id=comment_id)
+    # comment.delete()  # db 에서 삭제되고, 
+    # return redirect(comment.article)  # 이 함수가 끝난 후에 메모리에서 삭제된다. => 메모리삭제와 db삭제는 다르다. 
 
     
 

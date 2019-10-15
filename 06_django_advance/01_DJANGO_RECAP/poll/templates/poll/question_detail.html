@@ -1,0 +1,15 @@
+{% extends 'poll/base.html' %}
+
+{% block title %}Question{% endblock title %}
+
+{% block body %}
+
+<h1>{{ question.title }}</h1>
+
+<select>
+    <option value="한식">한식</option>
+    <option value="중식">중식</option>
+    <option value="양식">양식</option>
+</select>
+
+{% endblock body %}

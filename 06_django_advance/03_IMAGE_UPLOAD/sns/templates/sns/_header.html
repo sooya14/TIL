@@ -1,0 +1,17 @@
+<header>
+    <form action="{% url 'sns:create_posting' %}" enctype="multipart/form-data" method="POST">  <!--enctype="multipart/form-data" form 안에 파일을 넣을려면 꼭 써줘야한다. -->
+        {% csrf_token %}
+        <div class="form-row align-items-center">
+            <label for="content" class="sr-only">content</label>  <!--sr-only : 실제로 화면에서는 보이지 않는다. -->
+            <input id="content" type="text" name="content">
+            
+            <!-- type 이 file 이면 enctype="multipart/form-data" 설정을 해줘야 받아볼 수 있다. -->
+            <input id-"image" name="image" type="file" accept="image/*">  <!--accept="image/*" : 이미지 파일들 중에서 파일을 선택할 수 있게 -->
+            <label for="image"></label>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+    
+        </div>
+    </form>
+
+</header>

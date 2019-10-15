@@ -14,8 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+# 이미지 사진 불러올 때 import 필요한 부분 
+from django.conf.urls.static import static
+from django.conf import settings  # MASTER_APP/settings.py 를 불러오는 방법
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('sns.urls')),
+    # path('media', '/media/폴더안에서 이미지를 찾아라')
+
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+    
