@@ -10,10 +10,25 @@ class Posting(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)  # 추가될 때만
     updated_at = models.DateTimeField(auto_now=True) # 수정, save 할 때마다 바뀔떄 마다 
 
-# detail 페이지를 쓸 거라면 만들어요
+    class Meta:
+        ordering = ['-created_at', ]  # created_at 을 desending 내림차순으로 
+
+    # detail 페이지를 쓸 거라면 만들어요
     def get_absolute_url(self):
         return reverse("sns:posting_detail", kwargs={"posting_id": self.pk})
 
     def __str__(self):
         return f'{self.pk}: {self.content}'
 
+class Comment(models.Model):
+    # related_name 이 없으면, posting.comment_set 이고, 아래와 같다면, posting.comments
+    posting = models.ForeignKey(Posting, on_delete=models.CASCADE, related_name='comments')  # posting 이 comment 를 부를 때 이렇게 이름이 바뀐다. 
+    content = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at',]
+
+    def __str__(self):
+        return f'{self.id}: {self.content[:10]}'
