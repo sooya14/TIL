@@ -1,10 +1,13 @@
-{% extends 'board/base.html' %}
+{% extends 'base.html' %}
 {% block title %}Edit article
 {% endblock  %}
 
 {% block body %}
 <h1>Edit article</h1>
 
+{% include 'board/_form.html' %}
+
+{% endblock  %}
 
 {% comment %} <form action="{% url 'board:update' article.id %}" method="POST"> {% endcomment %}
 
@@ -27,5 +30,3 @@
     </form>
 </form> {% endcomment %}
 
-{% include  'board/_form.html' %}
-{% endblock  %}

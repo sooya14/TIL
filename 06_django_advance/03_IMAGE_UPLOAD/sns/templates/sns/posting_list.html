@@ -5,8 +5,9 @@
 {% block list %}active{% endblock list %}
 
 {% block body %}
+{% if user.is_authenticated %} <!-- 로그인 한 사람만 보일 header 보일 수 있게 -->
   {% include 'sns/_header.html' %}
-
+{% endif %} 
   {% if postings %}
     <section class="card-columns">
       {% for posting in postings %}

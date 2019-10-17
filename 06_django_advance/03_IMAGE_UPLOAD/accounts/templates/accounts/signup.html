@@ -1,18 +1,10 @@
 {% extends 'accounts/base.html' %}
-{% load bootstrap4 %}
+
 
 {% block title %}Signup{% endblock title %}
 
 {% block body %}
 
-    <form action="" method="POST">  <!-- action 을 굳이 적지 않는다... 왜일까.............ㅇㅅㅇ -->
-        {% csrf_token %}
-        {% bootstrap_form form %}
-
-        {% buttons %}  <!-- class=form-group 을 만들어주는 용도 / 큰 차이는 없다.-->
-        <button type="submit" class="btn btn-primary">submit</button>
-        {% endbuttons %}
-    </form>
-
+{% include 'accounts/_form.html' %}
 
 {% endblock body %}

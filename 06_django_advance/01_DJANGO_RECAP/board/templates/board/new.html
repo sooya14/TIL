@@ -1,10 +1,12 @@
-{% extends 'board/base.html' %}
+{% extends 'base.html' %}
 {% block title %}New article
 {% endblock  %}
 
 {% block body %}
 <h1>New article</h1>
 {% include 'board/_form.html' %}
+
+{% endblock  %}
 
 {% comment %} <form method="POST">
     {% csrf_token %}
@@ -37,4 +39,3 @@
 
 {% comment %} {% include 'board/_form.html' %} {% endcomment %}
 
-{% endblock  %}

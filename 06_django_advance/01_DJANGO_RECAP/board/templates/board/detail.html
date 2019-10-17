@@ -1,8 +1,15 @@
-{% extends 'board/base.html' %}
+
+{% extends 'base.html' %}
 {% block title %}Article detail{% endblock %}
 
 {% block body %}
     <h1>{{ article.title }}</h1> <!-- views. 에서 넘겨줬기 때문에 바로 받아올 수 가 있다. 객체 하나이기 때문에-->
+
+    <div>
+        <small>created: {{ article.created_at }}</small>
+        <small>created: {{ article.update_at }}</small>
+    </div>
+
     <p>
         {{ article.content }}
     </p>

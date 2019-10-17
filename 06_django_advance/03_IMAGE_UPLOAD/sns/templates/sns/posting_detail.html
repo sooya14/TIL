@@ -7,41 +7,44 @@
 {% block body %}
 <div class="row mt-3">
 
-  <div class="col-12 col-md-6">
-    <div class="card">
-      {% if posting.image %}
-        <img class="card-img-top image-fluid" src="{{ posting.image.url }}" alt="{{ posting.image }}">
-       {% else %}
-        <img class="card-img-top image-fluid" src="https://picsum.photos/400/200" alt="random-image">
-      {% endif %}
+    <div class="col-12 col-md-6">
+        <div class="card">
+            {% if posting.image %}
+            <img class="card-img-top image-fluid" src="{{ posting.image.url }}" alt="{{ posting.image }}">
+            {% else %}
+            <img class="card-img-top image-fluid" src="https://picsum.photos/400/200" alt="random-image">
+            {% endif %}
 
-      <div class="card-body">
-        <i class="fab fa-angrycreative fa-3x"></i>
-        <hr>
+            <div class="card-body">
+                <i class="fab fa-angrycreative fa-3x"></i>
+                <hr>
 
-        <div class="row">
-            <div class="col-10">
-                <p class="card-text">{{ posting.content }}</p>
-                
+                <div class="row">
+                    <div class="col-10">
+                        <p class="card-text">{{ posting.user.username }}</p>  <!--username 안 써도 작동하긴 한다. -->
+                        <p class="card-text">{{ posting.content }}</p>
+
+                    </div>
+
+                    <div class="col-2">
+                    {% if user == posting.user %}
+                         <form action="{% url 'sns:delete_posting' posting.id %}" method="POST">
+                            {% csrf_token %}
+                            <button>
+                                <i class="fas fa-trash"></i>
+                            </button>
+                    {% endif %}
+                       
+
+                        </form>
+                    </div>
+
+                </div>
             </div>
-
-            <div class="col-2">
-            <form action="{% url 'sns:delete_posting' posting.id %}" method="POST">
-            {% csrf_token %}
-                <button>
-                    <i class="fas fa-trash"></i>
-                </button>
-                
-            </form>
         </div>
-        
-        </div>
-      </div>
     </div>
-  </div>
-    
-{% include 'sns/_comment.html' %}
+
+    {% include 'sns/_comment.html' %}
 
 </div>
 {% endblock %}
-

@@ -12,7 +12,7 @@ urlpatterns = [
     path('articles/<int:article_id>/', views.article_detail, name='article_detail'),
 
     # Create 글 쓰기(new) render
-    path('articles/new/', views.new_article, name='new_articl'),
+    path('articles/new/', views.new_article, name='new_article'),
     # Create 글 저장 (create) 
     # 함수를 불러오는 것이 아니라 create url 로 이동하는 것 
     # path('articles/create/', views.create, name='create'),

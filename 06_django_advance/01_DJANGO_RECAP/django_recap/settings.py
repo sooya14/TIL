@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# BASE_DIR == 프로젝트 폴더 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# 정확하게 컴퓨터에서 알아서 파일이 있는 위치를 잡아온다는 코드 
 
 
 # Quick-start development settings - unsuitable for production
@@ -58,7 +60,14 @@ ROOT_URLCONF = 'django_recap.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 1> 프로젝트 전체에서 공통으로 쓸 HTML 을 어디에 두고, 어떻게 찾을 것인가. 
+        # dajnago 는 (기본세팅) 비어있으면 INSTALLED_APPS 안의 templates/ 폴더에서 찾는다.
+        # 아래 코드는 추가적으로 찾고 싶은 위치를 위치를 우리가 지정하는 것이다. 
+        # BASE_DIR 은 프로젝트 폴더를 의미하므로, 
+        # 최종적으로 01_DJANGO_RECAP/django_recap/templates 도 찾아달라는 의미이다. 
+        'DIRS': [os.path.join(BASE_DIR, 'django_recap', 'templates')],  
+        # os.path.join(BASE_DIR, 'templates') : 현재의 운영체제에 맞게 슬래쉬를 그어준다. / 프로젝트 안에 templates 를 안에서 찾아준다는 의미 
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

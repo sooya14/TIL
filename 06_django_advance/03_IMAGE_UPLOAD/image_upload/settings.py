@@ -126,3 +126,5 @@ STATIC_URL = '/static/'  # 우리가 사용할 js/css/images
 # 미디어는 사용자가 업로드하는 것
 MEDIA_URL = '/media/'  # 찾을 위치 / 어디에 있든지 다 알아서 찾기 때문에 os 어쩌구를 따로 굳이 적어주지 않는다. 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 자동으로 알아서 경로를 잡아준다. => 저장될 위치 
+
+AUTH_USER_MODEL = 'auth.User'  # auth 앱에서 user 모델을 가져온하는 의미 
