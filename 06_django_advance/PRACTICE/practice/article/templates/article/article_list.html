@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}list{% endblock title %}
+
+{% block body %}
+
+<h1>list</h1>
+
+{% if articles %}
+
+{% for article in articles %}
+    <ul>
+        <li>{{ article.title }}</li>
+    </ul>
+
+
+{% endfor %}
+
+{% endif %}
+
+<a href="{% url 'article:new_article' %}">
+    <button>새글</button>
+</a>
+
+
+{% endblock body %}
