@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required  # 회원인 사람만 사용할 수 있게 
 
 from .models import Posting, Comment
@@ -27,9 +27,15 @@ def posting_list(request):
 def posting_detail(request, posting_id):
     posting = get_object_or_404(Posting, id=posting_id)
     comments = posting.comments.all()  # posting.comment_set 이 아닌 이유는 Model => related_name
+
+
+    is_like = True if posting.like_users.filter(id=request.user.id).exists() else False
+
+
     return render(request, 'sns/posting_detail.html', {
         'posting': posting, 
         'comments': comments,
+        'is_like': is_like,
     })
 
 
@@ -86,3 +92,31 @@ def delete_comment(request, posting_id, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     comment.delete()
     return redirect(posting)
+
+
+@login_required
+@require_POST  # 데이터 베이스에 영향을 준다. 레코드가 추가된다. 
+def toggle_like(request, posting_id):
+    user = request.user  # 이 요청을 보낸 user
+    posting = get_object_or_404(Posting, id=posting_id)
+
+    # dislike 합침
+    # if user in posting.like_users.all():
+    if posting.like_users.filter(id=user.id).exists():
+        posting.like_users.remove(user)  # Delete
+        is_like = False
+
+    else:
+        posting.like_users.add(user)  # Create
+        is_like = True
+    return redirect(posting)
+
+
+
+# @login_required
+# @require_POST
+# def dislike(request, posting_id):
+#     user = request.user
+#     posting = get_object_or_404(Posting, id=posting_id)
+#     posting.like_users.remove(user)  # Delete
+#     return redirect(posting)
