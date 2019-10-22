@@ -33,11 +33,13 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django_extensions',
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth',  # 인증관련 app 에 
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'postings',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -114,13 +116,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'accounts.User'  # 기본 세팅이 되어 있던 것을 덮어주는 것 / 확장을 하든말든 일단 써놓는게 좋으다
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRA = [
-    
+
 ]
 
 
