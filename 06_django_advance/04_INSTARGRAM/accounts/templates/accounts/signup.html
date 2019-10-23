@@ -1,0 +1,16 @@
+{% extends 'base.html' %}  <!-- 무조건 extends 가 맨 위에 있어야한다. / settings 에서 이미 최상단의 templates 보도록 설정했기 때문에  -->
+
+{% load bootstrap4 %}
+
+{% block body %}
+<form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+
+</form>
+
+
+{% endblock body %}
