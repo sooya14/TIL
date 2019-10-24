@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+  
+        {{ article.title }}
+        {{ article.content }}
+  
+
+    <div>
+       <a href="{% url 'articles:article_like' article.id %}">
+        {% if request.user in article.like_users.all %}
+        싫어요
+        {% else %}
+        좋아요
+        {% endif %}        
+        </a>
+
+        
+    </a>
+
+
+    </div>
+    <h2>{{ article.like_users.count }}명이 좋아합니다. </h2>
+
+
+    <form action="{% url 'articles:article_update' article.id %}" method="POST">
+    {% csrf_token %}
+        <button>수정</button>
+    </form>
+    <form action="{% url 'articles:article_delete' article.id %}" method="POST">
+
+    {% csrf_token %}
+        <button>삭제</button>
+    </form>
+
+
+{% endblock %}
