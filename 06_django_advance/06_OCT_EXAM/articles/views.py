@@ -55,12 +55,12 @@ def article_update(request, article_id):
     if request.method == 'POST':
     # 2. instance 주기 
         form = ArticleForm(request.POST, instance=article)
-    if form.is_valid():
-        # 3. 지우기 (사실 안지워도 되긴함...)
-        # article = form.save(commit=False)
-        # article.user = request.user  # 혹은 article.user_id = request.user.id
-        article.save()
-        return redirect('articles:article_detail', article.id)
+        if form.is_valid():
+            # 3. 지우기 (사실 안지워도 되긴함...)
+            # article = form.save(commit=False)
+            # article.user = request.user  # 혹은 article.user_id = request.user.id
+            article.save()
+            return redirect('articles:article_detail', article.id)
     else:
         # 4. 또 instance 주기 
         form = ArticleForm(instance=article)
