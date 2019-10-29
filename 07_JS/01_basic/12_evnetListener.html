@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my">
+
+
+    </div>
+
+
+    <button id="js-button">Click Me</button>  <!--  -->
+    <button>Me too</button>
+    <button>Hi</button>
+
+    <script>
+        // Event Listener
+        /*
+            [무엇]을    [언제]      [어떻게] 한다. 
+             버튼       클릭        화면에 나타냄
+        */
+
+        // 무엇
+        const button = document.querySelector('#js-button'); // button*js-button | id 설정해줘서 버튼 하나선택할 수 있다. 
+
+        // 어떻게
+        function yap() {
+            const area = document.querySelector('#my'); // div#my
+            area.innerHTML = '<h1>얍!</ㅗ1>';
+        }
+
+        // 언제 => [무엇] button [언제] addEventListener( [언제], [어떻게])
+        button.addEventListener('click', yap)  // (일어나는 이벤트, 행동)
+
+    
+    </script>
+</body>
+</html>
