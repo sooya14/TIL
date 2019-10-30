@@ -62,14 +62,16 @@ const searchAndPush = (keyword) => {
     
     const AJAX = new XMLHttpRequest();  // 요청 준비
     AJAX.open('GET', url);  // 요청 세팅
-    AJAX.send();  // 요청 보내기 
+    AJAX.send();  // 요청 보내기 | 기다려주지 않는다. 
+
+
     AJAX.addEventListener('load', function (answer) {
         const res = answer.target.response;
         const giphyData = JSON.parse(res);
         const dataSet = giphyData.data;
 
         inputArea.innerHTML = null;  // 검색창 비우기 
-        resultArea.innerHTML = null; // 새로 검색하면 이전꺼 비우기
+        resultArea.innerHTML = null; // 기존 검색 결과 날리기 
         for (const data of dataSet) {
             pushToDom(data.images.fixed_height.url);
         }
