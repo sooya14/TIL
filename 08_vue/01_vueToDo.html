@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+
+</head>
+<body>
+    <div id="app">
+        <input type="text"
+            v-model="newTodo"
+            v-on:keyup.enter="addTodo"
+        >
+        <button v-on:click="addTodo">+</button>
+        <button v-on:click="clearCompleted">Clear Completed</button>
+        <!-- 'v-' 접두사가 붙으면, 디렉티브(directive) 라고 부른다. / reactive 한 동작을 한다. -->
+        <ul>
+            <!-- 'v-for' 가 있는 Element 가 반복 -->
+            <!-- 'v-if' 는 평가신이 true 일 때만 보임. -->
+            <!-- 'v-for' 문 이 우선순위가 있다. (todo 를 먼저 꺼내야 if문이 돌 수 있기 때문에) -->
+            <!-- 우선순위 'v-for' > 'v-on' -->
+            <li v-for="todo in todos" v-if="!todo.completed" v-on:click="check(todo)">  <!-- ! 를 붙이면 반전된다. (false 만 보여준다. )-->
+                {{ todo.content }}
+            </li>
+            <!--'v-else'와 'v-if-는 딱 붙어있어야 함! -->
+            <li v-else  v-on:click="check(todo)">
+                완료 => {{ todo.content }}
+            </li>
+        </ul>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+
+    <script>
+        const app = new Vue({  // console 에서 테스트 하기 위해서 app으로 설정한다. 
+            el: '#app',
+            data: {  // data 가 수정된다. === DOM re-render 가 일어난다. 
+                newTodo: '',
+                todos: [],
+                
+            }, 
+            methods: {
+                check: function(todo) {
+                    todo.completed = !todo.completed
+
+                    // todo.completed = todo.completed ? false : true
+                    
+                    // if (todo.completed) {
+                    //     todo.completed = false;  // data 에는 todo 가 없기 때문에 인자로 todo를 넘겨줘야한다. 
+                    // }
+                    // else {
+                    //     todo.completed = true;
+                    // }
+                },
+                addTodo: function() {
+                    this.todos.push({
+                        content: this.newTodo,
+                        completed: false,
+                    })
+                    this.newTodo = null;  // 검색어 비우기 
+                },
+                clearCompleted: function() {
+                    const newTotods = [];
+                    for (const todo of this.todos){
+                        if (!todo.completed) { 
+                            newTotods.push(todo);
+                        }
+                    }
+                    this.todos = newTotods;
+
+                    // this.todos = this.todos.filter(todo => !todo.completed);
+                }
+            },
+        });  
+
+
+
+
+    </script>
+</body>
+</html>

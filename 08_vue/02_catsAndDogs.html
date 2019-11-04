@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cats & dogs</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="getCatImage">냥냥</button>
+        <button v-on:click="getDogImage">멍멍</button>
+
+        <span>냐옹: {{ catCount }}</span>
+        <span>멍멍: {{ dogCount }}</span>
+        <div>
+            <img 
+                v-for="image in imageUrls"
+                v-bind:src="image" 
+                alt="animal-image" 
+                height="300px"
+            >  <!--v-bind : src 속성을 그냥 바인딩 하는게 아니라 함수안에서 찾도록 한다.-->
+        </div>
+
+    </div>
+
+    <!-- load 하는데 시간이 걸리기 때문에 맨 마지막에 놓는다. div#app 이 핵심이니까 load 하는데 늦어저도 상관은 없기 때문에 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                // 맨 처음 app 이 Load 되었을 때의 data 를 의미한다. 
+                catCount: 0,
+                dogCount: 0,
+                imageUrls: [],
+            },
+            // methods === data 바꾸려고 쓰는 함수. 
+            methods: {  // methods 에서 key: [VALUE: 절대 () => {} 쓰면 안됨!];
+                getCatImage: function () {
+                    const URL = 'http://api.thecatapi.com/v1/images/search';
+
+                    axios.get(URL)  // axios 는 응답이 이미 파싱되어 있고, key data 안에 있다. 
+                        // .then(resJson => resJson.json())  
+                        // then 쓸 때는 arrow 만 가능하다!
+                        // .then(resData => {  // 이 구간은 function 사용하면 안된다. 
+                        //     const whatIWant = resData.data;
+                        //     this.imageUrls.push(whatIWant[0].url)
+                        // })  // 바로 접근은 할 수 없고 한번 들어가서 안에서 꺼낼 수 있다. 
+                            .then(res => {
+                                this.imageUrls.push(res.data[0].url);
+                                this.catCount++;
+                            })
+
+
+                    // fetch(URL)
+                    //     .then(resJson => resJson.json())  // resJson === JSON 문자열 
+                    //     .then(resData => this.imageUrl = resData[0].url)
+                },
+
+                getDogImage: function () {
+                    const URL = 'https://dog.ceo/api/breeds/image/random';
+                    axios.get(URL)
+                        // .then(resJson => resJson.json())
+                        // .then(resData => this.imageUrls.push(resData.data.message))
+                        .then(res => {
+                            this.imageUrls.push(res.data.message);
+                            this.dogCount++;
+                        })
+
+                    // fetch(URL)
+                    //     .then(resJson => resJson.json())
+                    //     .then(resData => this.imageUrl = resData.message)
+                        
+                },
+            },
+        })
+    </script>
+</body>
+</html>
