@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX</title>
+</head>
+<body>
+    <!-- XHR: browser 내장. 제일 기본혀으, 결국 얘가 일함 -->
+    <button id="js-data-load-btn">XHR</button>
+    <!-- Fetch: browser 제공. XHR 쉬게 쓰게 해줌 -->
+    <button id="js-load-fetch">Fetch</button>
+    <!-- Axios: 외부 라이브러리. XMR ㅋ쓰기 쉽게 해줌-->
+    <button is="js-load-axios">Axios</button>
+
+
+    <div id="js-content-area">
+       
+    </div>
+
+    <script>
+        const url = 'https://koreanjson.com';
+        const btn1 = document.querySelector('#js-data-load-btn');
+        const btn2 = document.querySelector('#js-load-fetch');
+        const btn3 = document.querySelector('#js-load-axios');
+        let postId = 1
+        btn1.addEventListener('click', () => {
+            // Asynchronous Javascript And XML | 최근은 XML 이 아니라 json 사용한다. | Asynchronous 비동기 => 화면 전환이 없는 요청 
+            // HTML 전환 없이 요청(GET, POST, PATCH, DELETE)을 보낸다. 
+            const AJAX = new  XMLHttpRequest(); // 
+            AJAX.open('GET', `${url}/posts/${postId++}`);  // 클릭을 할 때마다 postId 가 하나씩 올라간다. 
+            AJAX.send();  // 요청을 보낸다. 
+            AJAX.addEventListener('load', (e) => {
+                const area = document.querySelector('#js-content-area'); // 응답이 오면 
+                const data = JSON.parse(e.target.response);
+                area.innerHTML += `<p>${data.title}</p>`  // 해석한 것을 가져와라 
+                // console.log(e.target.response);
+            });
+
+        });
+
+        btn2.addEventListener('click', () => {
+            fetch(`${url}/posts/${postId++}`)  // GET 요청 용
+                // .then(() => {return res.json()})  // 응답을 가지고 무엇을 할것인지 
+                .then(res => res.json())  // 위랑 똑같은 코드 
+                .then(data => {
+                    const area = document.querySelector('#js-content-area');
+                    area.innerHTML += `<p>${data.title}</p>`
+                })
+                .catch(err => console.error(`${err}`));  // 에러가 나왔을 때, 
+        })
+
+    </script>
+</body>
+</html>
