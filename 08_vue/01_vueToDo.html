@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Todo</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
 
 </head>
 <body>
     <div id="app">
+        <select v-model="showMode">
+            <option value="all">모두보기</option>
+            <option value="active">할 일 보기</option>
+            <option value="done">끝난 일 보기</option>
+        </select>
+        <!--'v-model' 사용자 입력값 <=> [data] 랑 동기화 -->
         <input type="text"
-            v-model="newTodo"
+            v-model="newTodo"  
             v-on:keyup.enter="addTodo"
         >
         <button v-on:click="addTodo">+</button>
@@ -16,15 +28,28 @@
         <!-- 'v-' 접두사가 붙으면, 디렉티브(directive) 라고 부른다. / reactive 한 동작을 한다. -->
         <ul>
             <!-- 'v-for' 가 있는 Element 가 반복 -->
+            <!-- 'v-for' 는 반드시 'v-bind:key="UNIQUE KEY"' 가 있어야한다! -->
             <!-- 'v-if' 는 평가신이 true 일 때만 보임. -->
             <!-- 'v-for' 문 이 우선순위가 있다. (todo 를 먼저 꺼내야 if문이 돌 수 있기 때문에) -->
             <!-- 우선순위 'v-for' > 'v-on' -->
-            <li v-for="todo in todos" v-if="!todo.completed" v-on:click="check(todo)">  <!-- ! 를 붙이면 반전된다. (false 만 보여준다. )-->
-                {{ todo.content }}
+            <li 
+                v-for="todo in sortedTodos"  
+                v-bind:key="todo.id" 
+                v-if="!todo.completed" 
+                v-on:click="check(todo)"
+            >  <!-- ! 를 붙이면 반전된다. (false 만 보여준다. )-->
+            <!--sortedTodos 는 () 없어야 한다. => 끝낫을 때는 함수가 아니라 값이다. | methods 는 ()를 붙여서 실행하고 com-->
+                <input type="checkbox" v-model="todo.completed">
+                <span>{{ todo.content }}</span>
             </li>
             <!--'v-else'와 'v-if-는 딱 붙어있어야 함! -->
-            <li v-else  v-on:click="check(todo)">
-                완료 => {{ todo.content }}
+            <li v-else  
+                v-bind:key="todo.id" 
+                v-on:click="check(todo)" 
+                class="completed"
+            >
+                <input type="checkbox" v-model="todo.completed">
+                <span>{{ todo.content }}</span>
             </li>
         </ul>
 
@@ -34,14 +59,31 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
 
     <script>
+        const STORAGE_KEY = 'vue-todos';
+        const todoStorage = {
+            load() {
+                const storageItems = localStorage.getItem(STORAGE_KEY)
+                // return storageItems ? JSON.parse(storageItems) : []
+
+                return JSON.parse(localStorage.getItem(storageItems) || '[]');  // || or 연산자 
+                // 파이썬과 달리 자바스크립트는 비어있는 [], {} 도 true 로 판단한다. 
+                
+            },
+            save(todosArray) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(todosArray));
+            },
+        }
+
+
         const app = new Vue({  // console 에서 테스트 하기 위해서 app으로 설정한다. 
             el: '#app',
             data: {  // data 가 수정된다. === DOM re-render 가 일어난다. 
                 newTodo: '',
-                todos: [],
+                todos: todoStorage.load(),  // 새로고침해도 그대로 불러와진다. 
+                showMode: 'all',
                 
             }, 
-            methods: {
+            methods: {  // setter 함수: data 가 수정되는 로직 | return 이 보통 없다. |  ()를 붙여서 실행
                 check: function(todo) {
                     todo.completed = !todo.completed
 
@@ -56,6 +98,7 @@
                 },
                 addTodo: function() {
                     this.todos.push({
+                        id: Date.now(),  // 가장 유니크하게 id 설정하는 방법은 시간 (다른 방법은 삭제할때 오류발생할 수 있다.)
                         content: this.newTodo,
                         completed: false,
                     })
@@ -70,14 +113,45 @@
                     }
                     this.todos = newTotods;
 
-                    // this.todos = this.todos.filter(todo => !todo.completed);
+                    // this.todos = this.todos.filter(todo => !todo.completed);  // 시험에 나오긴 한다 ㅇㅅㅇ 
+                }, 
+            }, 
+            computed: {  // data 를 가공해서 리턴함. 수정X (getter 함수 )
+                // ES6+ object 안에서 함수일때만 이렇게 사용가능
+                sortedTodos () {  // 함수 이름이 리턴되는 값 | 이름 보면 명사형인 값인것 같지만 함수이다. 어짜피 return 되는 값이 list |  ()를 붙이기 않고 실행 
+                if (this.showMode === 'active') {
+                    // 남은 일들만 보여주기 
+                    const notFinished = [];
+                    for (const todo of this.todos) {
+                        if (!todo.completed) {notFinished.push(todo)}
+                    }
+                    return notFinished;
                 }
+                else if (this.showMode === 'done') {
+                    // 끝날 일들만 보여주기 
+                    return this.todos.filter(todo => todo.completed);
+                }
+                else {
+                    // shwMode 가 all일 때, 
+                    return this.todos;
+                }
+            },  
+            },
+            watch: { // 특정 data 를 관찰함. 해당 data 가 변하면 함수 실행함. <외부 API 사용할 때만 사용> : 저장하거나 불러올때만 (그외는 최대한 쓰면 안되는 함수 )
+                // 이름 (key)은 반드시 data의 key 값과 같아야 한다.  
+                todos: {
+                    handler: function () {
+                    // LOCALSTORAGE.save()
+                    todoStorage.save(this.todos);
+                }, 
+                deep: true,  // 밑에 있는 것들도 watch 하고 있다. 
+                } 
             },
         });  
-
-
-
 
     </script>
 </body>
 </html>
+
+<!--Local Storage: 브라우저가 꺼저도 남아 있다. (본인 브라우저만)-->
+<!--Session Stroage: 브라우저가 꺼지기 전까지만 남아있다. -->

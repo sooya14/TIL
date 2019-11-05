@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // JS Global 변수
+        glob1 = 1;
+      
+        function qq() {
+            for (t=0; t < 10; t++) {
+            glob2 = 11;
+            } 
+            glob3 = 111;
+        }
+   
+        qq();  // 어디서나 접근가능하다. 
+
+
+        // var/let/const 의 차이 
+        //  ES5 var: function scope 
+        for (var i=0; i < 10; i++) {
+            var j = 100
+        }
+        console.log(i);  // 10 출력 | 함수가 아니기 때문에 접근이 가능하다. 
+
+        function aa () {
+            var a = 1;
+        }
+        aa();
+        console.log(a);  // 함수 밖에서는 적용이 되지는 않는다.
+        // 함수일때만 격리된 공간에 있다.  
+
+
+        // ES6+ let/const: block({}) scope
+        for (let x=0; x<10; x++) {
+            let y = 100;
+        }
+        console.log(x, y); // {} 세상 밖에서 접근이 되지 않는다. 
+
+        function bb () {
+            b = 1;
+        }
+        bb();
+        console.log(b);  // {} 안에 있기 때문에 함수 밖에서는 접근할 수 없다.  
+
+    </script>
+</body>
+</html>
