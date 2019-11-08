@@ -12,4 +12,6 @@ const me = {  // 파이썬에서는 집합이였지만 js 에서는 그렇지는
 // KEY - VALUE json
 // JavaScript Object Notation : JS 의 Object 처럼 표기하는 방법 
 
-// 
+// 아래처럼 접근 가능 
+me.electrionicDevice.phone
+me['electrionicDevice']['phone']

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.contrib.auth.decorators import login_required
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 
 from .forms import PostingForm, ImageForm, CommentForm
 from .models import Posting, Comment, HashTag
@@ -114,20 +114,25 @@ def create_comment(request, posting_id):
 
 
 @login_required
-# @require_POST  # 좋아요를 하고 해제하는 것 모두 데이터 베이스에 한줄을 추가하고 삭제하는 기능
+@require_POST  # 좋아요를 하고 해제하는 것 모두 데이터 베이스에 한줄을 추가하고 삭제하는 기능
 def toggle_like(request, posting_id):
-    posting = get_object_or_404(Posting, id=posting_id)
-    user = request.user
+    if request.is_ajax():  # 비동기 요청일 때만
 
-    # 좋아요를 누른 user 라면,
-    if posting.like_users.filter(id=user.id).exists():  # 
-        posting.like_users.remove(user)
-        liked = False
+        posting = get_object_or_404(Posting, id=posting_id)
+        user = request.user
+
+        # 좋아요를 누른 user 라면,
+        if posting.like_users.filter(id=user.id).exists():  # 
+            posting.like_users.remove(user)
+            liked = False
+        else:
+            posting.like_users.add(user)
+            liked = True
+
+        # return redirect(posting)
+
+        context = {'liked': liked, 'posting_id': posting.id, 'user_id': user.id}
+        return JsonResponse(context)
+
     else:
-        posting.like_users.add(user)
-        liked = True
-
-    # return redirect(posting)
-
-    context = {'liked': liked, 'posting_id': posting.id, 'user_id': user.id}
-    return JsonResponse(context)
+        return HttpResponseBadRequest()  # 사용자한테 request 잘못했다고 알려준다. 

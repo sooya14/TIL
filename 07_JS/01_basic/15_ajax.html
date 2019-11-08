@@ -10,18 +10,20 @@
     <!-- Fetch: browser 제공. XHR 쉬게 쓰게 해줌 -->
     <button id="js-load-fetch">Fetch</button>
     <!-- Axios: 외부 라이브러리. XMR ㅋ쓰기 쉽게 해줌-->
-    <button is="js-load-axios">Axios</button>
+    <button id="js-load-axios">Axios</button>
 
 
     <div id="js-content-area">
        
     </div>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         const url = 'https://koreanjson.com';
         const btn1 = document.querySelector('#js-data-load-btn');
         const btn2 = document.querySelector('#js-load-fetch');
         const btn3 = document.querySelector('#js-load-axios');
+        const area = document.querySelector('#js-content-area');
+
         let postId = 1
         btn1.addEventListener('click', () => {
             // Asynchronous Javascript And XML | 최근은 XML 이 아니라 json 사용한다. | Asynchronous 비동기 => 화면 전환이 없는 요청 
@@ -47,8 +49,17 @@
                     area.innerHTML += `<p>${data.title}</p>`
                 })
                 .catch(err => console.error(`${err}`));  // 에러가 나왔을 때, 
-        })
+        });
 
+        btn3.addEventListener('click', () => {
+            axios.get(`${url}/posts/${postId++}`)  // Promise
+                .then(res => res.data) 
+                .then(data => {  // data === res.data
+                    area.innerHTML += `<p>${data.title}</p>`
+                })  
+                .catch(err => console.error(err))  // 에러가 발생하면 에러를 들고와서 보여준다. 보통 Promise 를 할때 마지막에 코드를 넣는다. 
+        });
+        // axios fetch  중에 뭐가 더 좋을까요옹?
     </script>
 </body>
 </html>

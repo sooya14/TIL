@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my-id" class="my-class">
+        1
+    </div>
+    <div class="my-class">
+        2
+    </div>
+    <div class="my-class">
+        3
+    </div>
+    <div>
+        4
+    </div>
+    <script>
+        const a = document.querySelector('div');  // div 의 첫번째것만 잡아온다. 
+        const b = document.querySelector('.my-class');
+        const c = document.querySelector('#my-id');
+        
+        const d = document.querySelectorAll('div');
+        const e = document.querySelectorAll('.my-class');
+        const f = document.querySelectorAll('#my-id');
+
+        const g = document.createElement('div');
+        g.classList.add('my-class');
+        // const h = document.createElement('#new-one');
+        // const i = document.createElement('div.#new-one');
+        // const j = document.createElement('div.my-class');
+
+        // 항상 최상단에서 타고 내려올 필요가 없다. 꼭 document 로 시작하지 않아도 된다. 
+        // document 는 윈도우 안에 있다. 
+
+    </script>
+</body>
+</html>

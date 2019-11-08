@@ -4,6 +4,8 @@ likeButtons.forEach((likeButton) => {  // forEach: 버튼 하나하나를 돈다
     likeButton.addEventListener('click', function(event) {
         // 자바스크립트는 인자개수 안맞아도 돈다. 
         const URL = `/insta/${event.target.dataset.id}/like/`  // 최종적으로 보내야하는 URL
+        axios.defaults.xsrfCookieName = 'csrftoken'  
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken'
         axios.get(URL)  // 이 순간 get 요청이 날라간다. 
             .then((res) => {
                 console.log(res.data)
