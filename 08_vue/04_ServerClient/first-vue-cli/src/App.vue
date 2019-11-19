@@ -5,6 +5,7 @@
     <h1>나쁜말 ㄴㄴ </h1>
     <input type="text" v-model="input">
     <p>{{ filteredInput }}</p>
+
 </div>
 </template>
 
@@ -17,6 +18,7 @@ export default {
             input: 'Type something'
         }
     },
+
     methods: {},
     computed: {
         filteredInput: function() {

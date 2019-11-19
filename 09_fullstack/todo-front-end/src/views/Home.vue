@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>This is home!</h1>
+    <TodoList />
   </div>
 </template>
 
@@ -9,9 +10,13 @@
 // import HelloWorld from '@/components/HelloWorld.vue'
 
 import router from '../router';
+import TodoList from '../components/TodoList';
 
 export default {
   name: 'home',
+  components: {
+    TodoList,
+  },
   methods: {
     isLoggedIn () {
       this.$session.start();
