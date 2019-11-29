@@ -56,6 +56,10 @@
                             // VueSession 설치 후,
                             this.$session.start();  // sessionStorage.session-id: sess + Date.now()
                             this.$session.set('jwt', res.data.token);  // 인증 한 것을 token 으로 저장하는 것이 로그인이다. 저장하는 순간부터 로그인이 된것이다. 
+                            
+                            // vuex 
+                            // dispatch =>  action 을 실행하는 method
+                            this.$store.dispatch('login', res.data.token);  // 어떤 곳에 있던지 auth.js 에 접근해서 login을 사용한다. 
 
                             router.push('/');  // Django 에서의 return redirect('/') 랑 똑같다. 
                          
