@@ -1,29 +1,89 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-const useTitle = initialTitle => {
-  const [title, setTitle] = useState(initialTitle);
-  const updateTitle = () => {
-    const htmlTitle = document.querySelector("title");
-    htmlTitle.innerText = title;
+const useConfirm = (message = "", onConfirm, onCancle) => {
+  // if (typeof callback !== "function") {
+  //   return;
+  // }
+  const confirmAction = () => {
+    if (window.confirm(message)) {
+      onConfirm();
+    } else {
+      onCancle();
+    }
   };
-  useEffect(updateTitle, [title]); // dependency 는 매우 유용하다!
-
-  return setTitle;
+  return confirmAction;
 };
 
 const App = () => {
-  const titleUpdate = useTitle("Loading...");
-  // 시간지연
-  setTimeout(() => titleUpdate("Home"), 5000);
-
+  const deleteWorld = () => console.log("delete the word");
+  const abort = () => console.log("Aborted");
+  const confirmDelete = useConfirm("Are you sure", deleteWorld, abort);
   return (
     <div className="App">
-      <div>HI</div>
+      <button onClick={confirmDelete}>delete</button>
     </div>
   );
 };
 
 export default App;
+
+// // 06
+// // useClick 을 사용해서 useRef() 만들었다
+// const useClick = onClick => {
+//   // if (typeof onClick !== "fuction") {
+//   //   return;
+//   // }
+//   const element = useRef();
+//   // 여기서 fucntion 을 만들어준다
+//   useEffect(() => {
+//     //
+//     // element 존재 여부 확인
+//     if (element.current) {
+//       // 존재하면 addEventListener 실행
+//       element.current.addEventListener("click", onClick);
+//     }
+//     return () => {
+//       if (element.current) {
+//         element.current.removeEventListener("click", onClick);
+//       }
+//     };
+//   }, []); // dep 가 비어있기 때문에 update 는 신경안써도 갠춘
+//   return element;
+// };
+
+// const App = () => {
+//   const sayHello = () => console.log("say hello ");
+//   const title = useClick(sayHello);
+//   return (
+//     <div className="App">
+//       <h1 ref={title}>HI</h1>
+//     </div>
+//   );
+// };
+
+// 05
+// const useTitle = initialTitle => {
+//   const [title, setTitle] = useState(initialTitle);
+//   const updateTitle = () => {
+//     const htmlTitle = document.querySelector("title");
+//     htmlTitle.innerText = title;
+//   };
+//   useEffect(updateTitle, [title]); // dependency 는 매우 유용하다!
+
+//   return setTitle;
+// };
+
+// const App = () => {
+//   const titleUpdate = useTitle("Loading...");
+//   // 시간지연
+//   setTimeout(() => titleUpdate("Home"), 5000);
+
+//   return (
+//     <div className="App">
+//       <div>HI</div>
+//     </div>
+//   );
+// };
 
 // // 04. useEffect
 // const App = () => {
