@@ -1,31 +1,54 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const useConfirm = (message = "", onConfirm, onCancle) => {
-  // if (typeof callback !== "function") {
-  //   return;
-  // }
-  const confirmAction = () => {
-    if (window.confirm(message)) {
-      onConfirm();
-    } else {
-      onCancle();
-    }
+const usePreventLeave = () => {
+  const listener = event => {
+    event.preventDefault();
+    event.returnValue = ""; // 이 코드를 넣어줘야 작동한다
   };
-  return confirmAction;
+  // 사용자의 요청에서 보호하기 위한
+  const enablePrevent = () => window.addEventListener("beforeunload", listener);
+  const disablePrevent = () =>
+    window.removeEventListener("beforeunload", listener);
+  return { enablePrevent, disablePrevent };
 };
 
 const App = () => {
-  const deleteWorld = () => console.log("delete the word");
-  const abort = () => console.log("Aborted");
-  const confirmDelete = useConfirm("Are you sure", deleteWorld, abort);
+  const { enablePrevent, disablePrevent } = usePreventLeave();
   return (
     <div className="App">
-      <button onClick={confirmDelete}>delete</button>
+      <button onClick={enablePrevent}>Protect</button>
+      <button onClick={disablePrevent}>Unprotect</button>
     </div>
   );
 };
 
 export default App;
+
+// 07
+// const useConfirm = (message = "", onConfirm, onCancle) => {
+//   // if (typeof callback !== "function") {
+//   //   return;
+//   // }
+//   const confirmAction = () => {
+//     if (confirm(message)) {
+//       onConfirm();
+//     } else {
+//       onCancle();
+//     }
+//   };
+//   return confirmAction;
+// };
+
+// const App = () => {
+//   const deleteWorld = () => console.log("delete the word");
+//   const abort = () => console.log("Aborted");
+//   const confirmDelete = useConfirm("Are you sure", deleteWorld, abort);
+//   return (
+//     <div className="App">
+//       <button onClick={confirmDelete}>delete</button>
+//     </div>
+//   );
+// };
 
 // // 06
 // // useClick 을 사용해서 useRef() 만들었다
@@ -61,7 +84,7 @@ export default App;
 //   );
 // };
 
-// 05
+// // 05;
 // const useTitle = initialTitle => {
 //   const [title, setTitle] = useState(initialTitle);
 //   const updateTitle = () => {
@@ -70,13 +93,13 @@ export default App;
 //   };
 //   useEffect(updateTitle, [title]); // dependency 는 매우 유용하다!
 
-//   return setTitle;
+//   return setTitle; // title 을 업데이트 하기 위해
 // };
 
 // const App = () => {
 //   const titleUpdate = useTitle("Loading...");
-//   // 시간지연
-//   setTimeout(() => titleUpdate("Home"), 5000);
+//   // 시간지연 설정
+//   setTimeout(() => titleUpdate("Home"), 5000);  // 5초 후에 Hoem으로 변경
 
 //   return (
 //     <div className="App">
@@ -98,7 +121,7 @@ export default App;
 //   // number가 변할때만 sayHello 가 작동, aNumber 때는 작동 ㄴㄴ
 //   useEffect(sayHello, [number]);
 
-// // useEffect(sayHello, []);  // 빈리스트면 어떠한 경우에도 sayHello 가 작동하지 않는다.
+//   // useEffect(sayHello, []);  // 빈리스트면 어떠한 경우에도 sayHello 가 작동하지 않는다.
 //   return (
 //     <div className="App">
 //       <div>HI</div>
